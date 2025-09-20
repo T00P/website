@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DD Community</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1e1f22; /* Discord-like dark background */
+            color: #dcddde;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            position: relative;
+            padding-bottom: 4px;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #5865F2; /* Discord blurple */
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* New Dark and White Button Style */
+        .btn-primary {
+            background-color: #f2f3f5; /* White background */
+            color: #1e1f22; /* Dark text */
+            border: 2px solid #f2f3f5;
+            font-weight: 600;
+            transition: all 0.3s ease-in-out;
+        }
+        .btn-primary:hover {
+            background-color: transparent; /* Invert on hover */
+            color: #f2f3f5; /* White text */
+            border-color: #f2f3f5;
+        }
+
+        /* Section Animation */
+        .section {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Card Style and Animation */
+        .card {
+            background-color: #2b2d31;
+            border: 1px solid #36393f;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Social Icon Animation */
+        .social-icon {
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .social-icon:hover {
+            transform: scale(1.2);
+            color: #5865F2;
+        }
+
+        /* Placeholder styles (used for images if not loaded, or as fallback) */
+        .placeholder-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5rem;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.1);
+            background-color: #2b2d31;
+            border-radius: 1rem;
+        }
+        .placeholder-box.banner {
+            height: 16rem; /* 256px */
+            background: linear-gradient(to bottom, #5865F2, #f2f3f5); /* Blue to White Gradient */
+        }
+        .placeholder-box.card-image {
+             height: 10rem; /* 160px */
+             border-bottom-left-radius: 0;
+             border-bottom-right-radius: 0;
+             border-bottom: 1px solid #36393f;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #2b2d31; }
+        ::-webkit-scrollbar-thumb { background: #5865F2; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4752c4; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-gray-800/50 backdrop-blur-lg sticky top-0 z-50 border-b border-gray-700/50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img src="DDS.png" alt="DD Community Logo" class="w-10 h-10 rounded-full">
+                <span class="text-xl font-bold text-white">DD Community</span>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="nav-link text-white font-medium active">Home</a>
+                <a href="#about" class="nav-link text-white font-medium">About</a>
+                <a href="#rules" class="nav-link text-white font-medium">Rules</a>
+                <a href="#events" class="nav-link text-white font-medium">Giveaways</a>
+                <a href="#join" class="nav-link text-white font-medium">Join Us</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-4 space-y-2">
+            <a href="#home" class="block nav-link text-white font-medium active">Home</a>
+            <a href="#about" class="block nav-link text-white font-medium">About Us</a>
+            <a href="#rules" class="block nav-link text-white font-medium">Rules</a>
+            <a href="#events" class="block nav-link text-white font-medium">Giveaways</a>
+            <a href="#join" class="block nav-link text-white font-medium">Join Us</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <section id="home" class="section active text-center">
+            <div class="placeholder-box banner mb-8"></div>
+            <img src="DDS.png" alt="Server Logo" class="w-32 h-32 rounded-full mx-auto -mt-24 border-8 border-[#1e1f22] shadow-lg">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white mt-6">Welcome to DD Community</h1>
+            <p class="text-lg md:text-xl text-gray-300 mt-4 max-w-3xl mx-auto">The best place to hang out, play games, and make new friends. Join the conversation!</p>
+            <a href="https://discord.gg/GtjeX4Ns5K" target="_blank" class="btn-primary inline-flex items-center py-3 px-8 rounded-lg text-lg mt-8 shadow-lg transform hover:scale-105">
+                <i data-lucide="compass" class="mr-2"></i>
+                Join Discord
+            </a>
+        </section>
+
+        <section id="about" class="section">
+            <h2 class="text-3xl font-bold text-center text-white mb-8">About Our Community ✨</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-2xl font-semibold text-white mb-4">Who We Are</h3>
+                    <p class="text-gray-300 mb-4 leading-relaxed">We are a passionate group of gamers, creators, and friends who wanted to build a positive and inclusive space for everyone. Our server was founded with the simple goal of connecting people who share common interests.</p>
+                    <p class="text-gray-300 leading-relaxed">Whether you're here to find teammates for your favorite game, share your latest artwork, or just chat about your day, you'll find a welcoming home here.</p>
+                </div>
+                <div class="card rounded-lg p-4">
+                    <iframe src="https://discord.com/widget?id=1407721049289789592&theme=dark" width="100%" height="400" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section id="rules" class="section">
+            <h2 class="text-3xl font-bold text-center text-white mb-8">Server Rules 📜</h2>
+            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-6">
+                <div class="card p-6 rounded-lg"><h3 class="text-xl font-semibold text-white mb-2">1. Be Respectful</h3><p class="text-gray-300">Treat everyone with kindness. No harassment, hate speech, or bullying.</p></div>
+                <div class="card p-6 rounded-lg"><h3 class="text-xl font-semibold text-white mb-2">2. No Spam</h3><p class="text-gray-300">Avoid spamming text, images, or links in any channel.</p></div>
+                <div class="card p-6 rounded-lg"><h3 class="text-xl font-semibold text-white mb-2">3. Keep it SFW</h3><p class="text-gray-300">All content should be Safe for Work. No explicit material.</p></div>
+                <div class="card p-6 rounded-lg"><h3 class="text-xl font-semibold text-white mb-2">4. Use Correct Channels</h3><p class="text-gray-300">Post content in the designated channels.</p></div>
+                <div class="card p-6 rounded-lg"><h3 class="text-xl font-semibold text-white mb-2">5. No Self-Promotion</h3><p class="text-gray-300">Do not advertise without permission from staff.</p></div>
+                <div class="card p-6 rounded-lg"><h3 class="text-xl font-semibold text-white mb-2">6. Follow Discord's ToS</h3><p class="text-gray-300">All members must adhere to Discord's Terms of Service.</p></div>
+            </div>
+        </section>
+
+        <section id="events" class="section">
+            <h2 class="text-3xl font-bold text-center text-white mb-8">Giveaways 🎁</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card rounded-lg overflow-hidden"><div class="placeholder-box card-image">?</div><div class="p-6"><h3 class="text-xl font-bold text-white mb-2">1 Month Nitro Giveaway!</h3><p class="text-gray-400 mb-4">Ends this month!</p><p class="text-gray-300">Enter in the #giveaways channel to win a full month of Discord Nitro.</p></div></div>
+                <div class="card rounded-lg overflow-hidden"><div class="placeholder-box card-image">?</div><div class="p-6"><h3 class="text-xl font-bold text-white mb-2">2 Weeks Nitro Classic</h3><p class="text-gray-400 mb-4">New giveaway every 2 weeks!</p><p class="text-gray-300">A chance to win Nitro Classic. Watch for the next drop.</p></div></div>
+                <div class="card rounded-lg overflow-hidden"><div class="placeholder-box card-image">?</div><div class="p-6"><h3 class="text-xl font-bold text-white mb-2">Special Event Giveaways</h3><p class="text-gray-400 mb-4">During holidays & milestones!</p><p class="text-gray-300">We host special giveaways during events. You never know what you might win!</p></div></div>
+            </div>
+        </section>
+
+        <section id="join" class="section text-center">
+            <h2 class="text-3xl font-bold text-white mb-4">Ready to Join?</h2>
+            <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">Click the button below to get an invite to our Discord server!</p>
+            <a href="https://discord.gg/GtjeX4Ns5K" target="_blank" class="btn-primary inline-flex items-center py-3 px-8 rounded-lg text-lg mb-8 shadow-lg transform hover:scale-105">
+                <i data-lucide="party-popper" class="mr-2"></i>
+                Get Your Invite!
+            </a>
+        </section>
+    </main>
+
+    <footer class="text-center py-8 border-t border-gray-800 mt-12">
+        <p class="text-gray-400">Made by Immy</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            function showSection(hash, isInitialLoad = false) {
+                const targetHash = hash || '#home';
+                sections.forEach(section => {
+                    if ('#' + section.id === targetHash) {
+                        if (isInitialLoad) {
+                            section.style.transition = 'none';
+                        } else {
+                            section.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+                        }
+                        section.classList.add('active');
+                    } else {
+                        section.classList.remove('active');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === targetHash);
+                });
+            }
+
+            navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (window.location.hash !== targetId) {
+                    history.pushState(null, null, targetId);
+                    showSection(targetId);
+                }
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+            });
+
+            window.addEventListener('popstate', () => showSection(window.location.hash));
+            mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            showSection(window.location.hash, true);
+        });
+    </script>
+</body>
+</html>
